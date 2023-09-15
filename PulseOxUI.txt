@@ -1,6 +1,5 @@
 import processing.serial.*;
 import javax.swing.JOptionPane;
-import javax.swing.JOptionPane;
 
 Serial myPort;
 PFont myFont;

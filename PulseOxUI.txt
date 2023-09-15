@@ -34,7 +34,7 @@ void setup() {
   myPort.bufferUntil(lf);
 
   // Prompt for user's age and validate the input
-  int age = -1;  // Start with an invalid value for age
+  int age = -1;  
   while (age < 0 || age > 120) {
     String ageInput = prompt("Please enter your age:");
     try {
@@ -64,7 +64,7 @@ void draw() {
     fill(255);
     text("Press '1' for Fitness Mode", 50, 100);
     text("Press '2' for Relaxed v Stressed Mode", 50, 150);
-  } else if (fitnessMode || relaxedMode) { // Combining the condition to ensure both modes can display the graph
+  } else if (fitnessMode || relaxedMode) { 
     fill(255);
     displayGraph();
     if (relaxedMode) {
@@ -133,9 +133,12 @@ void addHeartRateValue(int value) {
 void displayGraph() {
    background(0);
 
-  int leftMargin = (int) (width * 0.1);  // 10% margin from the left
-  int rightMargin = (int) (width * 0.9);  // 90% of the width (or 10% margin from the right)
-  int topMargin = (int) (height * 0.1);  // 10% margin from the top
+  int leftMargin = (int) (width * 0.1);  
+  // 10% margin from the left
+  int rightMargin = (int) (width * 0.9);  
+  // 90% of the width (or 10% margin from the right)
+  int topMargin = (int) (height * 0.1);  
+  // 10% margin from the top
 
   stroke(255);
   strokeWeight(4);
@@ -183,7 +186,8 @@ void displayGraph() {
   text("Age-Adjusted Max Heart Rate: " + maxHeartRate, leftMargin, topMargin + 70);
 
   // Color-coded zones below the graph
-  float yPos = height * 0.85f;  // start 85% down the height of the screen, giving more room for horizontal layout
+  float yPos = height * 0.85f;  
+  // start 85% down the height of the screen, giving more room for horizontal layout
   String[] zoneLabels = {
     "90-100% Max", "80-90% Max", "70-80% Max", 
     "60-70% Max", "50-60% Max", "<50% Max"
@@ -197,30 +201,37 @@ void displayGraph() {
   float xPos = leftMargin;
   for (int i = 0; i < zoneLabels.length; i++) {
     fill(zoneColors[i]);
-    rect(xPos, yPos, zoneWidth, 15); // colored rectangle
-    fill(255); // white color for text
-    text(zoneLabels[i], xPos + zoneWidth / 2, yPos + 12); // centering the text within the rectangle
+    rect(xPos, yPos, zoneWidth, 15); 
+    // colored rectangle
+    fill(255); 
+    // white color for text
+    text(zoneLabels[i], xPos + zoneWidth / 2, yPos + 12); 
+    // centering the text within the rectangle
     xPos += zoneWidth;
   }
   
 // Additional information in relaxed mode
 if (relaxedMode) {
     if (avgheartRate > maxHeartRate * 0.85) {
-      fill(color(255, 0, 0)); // Red color for warning
+      fill(color(255, 0, 0)); 
+      // Red color for warning
       text("WARNING: Your heart rate is unusually high for a relaxed state.", leftMargin, topMargin + 140);
       text("Consider seeking medical advice.", leftMargin, topMargin + 155);
     } else if (avgheartRate > maxHeartRate * 0.75) {
-      fill(color(255, 174, 66)); // Orange color for caution
+      fill(color(255, 174, 66)); 
+      // Orange color for caution
       text("CAUTION: Your heart rate is slightly elevated.", leftMargin, topMargin + 140); 
     }
 
     // Check for Bradycardia and Tachycardia while in relaxedMode
     if (heartrate < 40) {
-      fill(color(255, 0, 0)); // Red color for bradycardia warning
+      fill(color(255, 0, 0)); 
+      // Red color for bradycardia warning
       text("WARNING: Your heart rate indicates Bradycardia.", leftMargin, topMargin + 175);
       text("Consider seeking medical advice.", leftMargin, topMargin + 190);
     } else if (heartrate > 100) {
-      fill(color(255, 0, 0)); // Red color for tachycardia warning
+      fill(color(255, 0, 0)); 
+      // Red color for tachycardia warning
       if (mood.equals("stressed")) {
         text("WARNING: Your heart rate indicates Tachycardia in a stressed state.", leftMargin, topMargin + 175);
       } else {
@@ -267,16 +278,19 @@ void displayMedicalWarnings() {
 void setStrokeColorBasedOnHeartRate(int heartRate, int maxHeartRate) {
   float hrPercentage = float(heartRate) / maxHeartRate;
   if (hrPercentage >= 0.9) {
-    stroke(color(255, 0, 0)); // Red
+    stroke(color(255, 0, 0)); 
+    // Red
   } else if (hrPercentage >= 0.8) {
-    stroke(color(255, 174, 66)); // Orange
+    stroke(color(255, 174, 66)); 
+    // Orange
   } else if (hrPercentage >= 0.7) {
-    stroke(color(0, 128, 0)); // Green
+    stroke(color(0, 128, 0)); 
+    // Green
   } else {
-    stroke(255); // Default white
+    stroke(255); 
+    // Default white
   }
 }
-// This function will create a dialog box to get input
 String prompt(String question) {
   return JOptionPane.showInputDialog(null, question);
 }
